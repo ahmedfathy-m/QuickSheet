@@ -123,8 +123,8 @@ class QuickSheetWrapper: UIViewController {
         activeDragArea.addGestureRecognizer(dragGesture)
         
         /// Offsetting view on keyboard appearance
-        NotificationCenter.default.addObserver(self, selector: #selector(willShowKB), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(willHideKB), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(willShowKB), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(willHideKB), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -141,7 +141,7 @@ class QuickSheetWrapper: UIViewController {
     
     // MARK: - Keyboard Show/Hide
     @objc func willShowKB(notification: NSNotification) {
-        guard let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
+        guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
         offsetForKeyboard(keyboardSize.height)
         keyboardOffset = -keyboardSize.height
         isKeyboardEnabled = true
@@ -193,9 +193,9 @@ class QuickSheetWrapper: UIViewController {
     }
     
     fileprivate func setupChildView() {
-        addChildViewController(childViewController)
+        addChild(childViewController)
         scrollView.addSubview(childView!)
-        childViewController.didMove(toParentViewController: self)
+        childViewController.didMove(toParent: self)
         
         guard let childView = childView else { return }
         childView.layer.cornerRadius = options?.cornerRadius ?? 10
@@ -230,7 +230,7 @@ class QuickSheetWrapper: UIViewController {
             activeDragArea.widthAnchor.constraint(equalToConstant: 100)
         ])
         activeDragArea.layer.cornerRadius = 3
-        containerView.bringSubview(toFront: activeDragArea)
+        containerView.bringSubviewToFront(activeDragArea)
     }
     
     // MARK: - Animations

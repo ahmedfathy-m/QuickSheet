@@ -1,0 +1,16 @@
+PODS:
+  - QuickSheet (0.1.0)
+
+DEPENDENCIES:
+  - QuickSheet (from `../`)
+
+EXTERNAL SOURCES:
+  QuickSheet:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  QuickSheet: 09e601216fc199db2908ca0178643bb367be1113
+
+PODFILE CHECKSUM: 6b3982d04f20d6fe1768e1737c77210cabf9d8d2
+
+COCOAPODS: 1.11.3

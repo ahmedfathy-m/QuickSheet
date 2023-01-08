@@ -1,0 +1,6 @@
+framework module QuickSheet {
+  umbrella header "QuickSheet-umbrella.h"
+
+  export *
+  module * { export * }
+}

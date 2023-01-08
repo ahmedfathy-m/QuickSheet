@@ -1,0 +1,6 @@
+framework module Pods_QuickSheet_Tests {
+  umbrella header "Pods-QuickSheet_Tests-umbrella.h"
+
+  export *
+  module * { export * }
+}

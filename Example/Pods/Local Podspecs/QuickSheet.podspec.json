@@ -1,0 +1,22 @@
+{
+  "name": "QuickSheet",
+  "version": "0.1.0",
+  "summary": "A short description of QuickSheet.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/Ahmed Fathy/QuickSheet",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "Ahmed Fathy": "ahmedfathy.mha@gmail.com"
+  },
+  "source": {
+    "git": "https://github.com/Ahmed Fathy/QuickSheet.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "10.0"
+  },
+  "source_files": "QuickSheet/Classes/**/*"
+}

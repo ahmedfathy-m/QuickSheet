@@ -1,0 +1,13 @@
+use_frameworks!
+
+platform :ios, '10.0'
+
+target 'QuickSheet_Example' do
+  pod 'QuickSheet', :path => '../'
+
+  target 'QuickSheet_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end

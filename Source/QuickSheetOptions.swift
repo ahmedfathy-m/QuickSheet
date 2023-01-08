@@ -34,6 +34,9 @@ public struct QuickSheetOptions {
         self.isScrollable = isScrollable
         self.shadowStyle = shadowStyle
     }
+    
+    /// The standard Quicksheet options
+    public static let standard = QuickSheetOptions(fraction: 0.3, isExpandable: true, isScrollable: false, cornerRadius: 5)
 
     /// Handle the layer shadow properties of the sheet
     public struct ShadowStyle {

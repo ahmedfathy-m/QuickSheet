@@ -44,13 +44,13 @@ Here's how you can use `QuickSheetOptions` to customise your pop-up
 - `shadowStyle`: Determines the shadow style of the pop-up. Set to `.standard` to use the default configuration or create your own `QuickSheetOptions.ShadowStyle` constant as follows
 ```
 let shadowStyle = QuickSheetOptions.ShadowStyle(shadowRadius: 10.0,
-                                                  shadowColor: .black,
-                                                  shadowOpacity: 0.25)
+                                                shadowColor: .black,
+                                                shadowOpacity: 0.25)
 ```
 
-## Example
-
-To run the example project, clone the repo, and run `pod install` from the Example directory first.
+## Demo
+- You can view the QuickSheet demo [here](https://www.youtube.com/watch?v=ejKw6xm64LA)
+- To run the example project, clone the repo, and run `pod install` from the Example directory first.
 
 ## Installation
 
@@ -61,9 +61,9 @@ it, simply add the following line to your Podfile:
 pod 'QuickSheet'
 ```
 
-## Author
-
-Ahmed Fathy, ahmedfathy.mha@gmail.com
+## Contact Me
+[![Email](https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:ahmedfathy.mha@gmail.com)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/ahmedfathy-mha/)
 
 ## License
 

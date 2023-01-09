@@ -10,7 +10,6 @@
 		2149FC7659E09E56F1040107AB1A9978 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
 		2B1F5C34E172B1724BF8FF7FEBF12A1B /* QuickSheet-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = CC63926C7F5C8CBB1D90706F40DF983C /* QuickSheet-dummy.m */; };
 		3DC60DD05F588B6B28EFED4CA84D0D3D /* Pods-QuickSheet_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = B98AF3A3CB29C8F08CB908272418542C /* Pods-QuickSheet_Tests-dummy.m */; };
-		4D278E0AA90475D8F72473B299A55CDD /* ReplaceMe.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62036235D4CC02B30D4C91E352E1D72 /* ReplaceMe.swift */; };
 		73495C8DD2E1BAA5B75E0EF7D3B84AA7 /* QuickSheet-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = D21F024EBE9ED1F8C40B11B5E8D54B33 /* QuickSheet-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		74965B4A296B6628008998DA /* QuickSheetWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74965B45296B6628008998DA /* QuickSheetWrapper.swift */; };
 		74965B4B296B6628008998DA /* QuickSheetOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74965B46296B6628008998DA /* QuickSheetOptions.swift */; };
@@ -69,7 +68,6 @@
 		C0E9B07BBC4DCDAAE00D636996E3E3D8 /* QuickSheet.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; path = QuickSheet.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		C1C80E9A6B9C09490F638648D83359C9 /* Pods-QuickSheet_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-QuickSheet_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		C5494FADC27409BA2AB807F400AB13D1 /* QuickSheet.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = QuickSheet.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		C62036235D4CC02B30D4C91E352E1D72 /* ReplaceMe.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ReplaceMe.swift; path = QuickSheet/Classes/ReplaceMe.swift; sourceTree = "<group>"; };
 		C735F5D868B66B9135BA9B132601BB32 /* Pods_QuickSheet_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QuickSheet_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC63926C7F5C8CBB1D90706F40DF983C /* QuickSheet-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "QuickSheet-dummy.m"; sourceTree = "<group>"; };
 		CCC9ACC88EF36E0915ED943AE32BBD70 /* QuickSheet-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "QuickSheet-Info.plist"; sourceTree = "<group>"; };
@@ -212,7 +210,6 @@
 			isa = PBXGroup;
 			children = (
 				74965B4F296B663A008998DA /* Source */,
-				C62036235D4CC02B30D4C91E352E1D72 /* ReplaceMe.swift */,
 				DEA980225032FCDE12913F462BB62F5C /* Pod */,
 				642BFA8E7A0E24E1D5AA87BE20F28D88 /* Support Files */,
 			);
@@ -404,7 +401,6 @@
 				74965B4C296B6628008998DA /* SheetState.swift in Sources */,
 				2B1F5C34E172B1724BF8FF7FEBF12A1B /* QuickSheet-dummy.m in Sources */,
 				74965B4E296B6628008998DA /* QuickSheet+UIViewController.swift in Sources */,
-				4D278E0AA90475D8F72473B299A55CDD /* ReplaceMe.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

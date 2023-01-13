@@ -13,20 +13,11 @@ class QuickSheetWrapper: UIViewController {
     /// The visual properties for the popup view
     internal var options: QuickSheetOptions!
     
-    lazy fileprivate var expandedScrollHeight: NSLayoutConstraint = scrollView.heightAnchor.constraint(equalToConstant: self.containerHeight)
-    
-    lazy fileprivate var compressedScrollHeight: NSLayoutConstraint = scrollView.heightAnchor.constraint(equalToConstant: self.minHeight)
-    
     /// Handles the dismiss animation for the warpped view controller
     fileprivate let transitionController = TransitionController()
     
     /// The dragging threshold, any drag translation below this threshold doesn't trigger a dismiss action, compression or expanison
     fileprivate var dismissThreshold: CGFloat = 40
-    
-    /// The sheet is only expandable if it has a minimum height which should be less than the max height by the amount of the dismiss threshold, otherwise it's not expandable
-    fileprivate var isExpandable: Bool {
-        return options.isExpandable
-    }
     
     /// The popup state
     fileprivate var sheetState: SheetState = .compressed
@@ -52,7 +43,7 @@ class QuickSheetWrapper: UIViewController {
         let view = UIScrollView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.isUserInteractionEnabled = true
-        view.layer.cornerRadius = options?.cornerRadius ?? 10
+        view.layer.cornerRadius = options.cornerRadius
         return view
     }()
     
@@ -61,16 +52,26 @@ class QuickSheetWrapper: UIViewController {
         var container = UIView()
         container.translatesAutoresizingMaskIntoConstraints = false
         container.isUserInteractionEnabled = true
-        let shadowStyle = options?.shadowStyle ?? QuickSheetOptions.ShadowStyle.standard
+        let shadowStyle = options.shadowStyle
         container.layer.shadowColor = shadowStyle.shadowColor.cgColor
         container.layer.shadowRadius = shadowStyle.shadowRadius
         container.layer.shadowOpacity = shadowStyle.shadowOpacity
         return container
     }()
     
+    lazy var stack: UIStackView = {
+       var stack = UIStackView()
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        stack.backgroundColor = .clear
+        stack.alignment = .fill
+        stack.distribution = .fill
+        stack.axis = .vertical
+        return stack
+    }()
+    
     /// The visual blur effect used for the background
     lazy var effectView: UIView = {
-        let blur = UIBlurEffect(style: options?.blurEffect ?? .systemUltraThinMaterialDark)
+        let blur = UIBlurEffect(style: options.blurEffect)
         let visual = UIVisualEffectView(effect: blur)
         visual.translatesAutoresizingMaskIntoConstraints = false
         return visual
@@ -78,7 +79,7 @@ class QuickSheetWrapper: UIViewController {
     
     var childViewController: UIViewController!
     
-    var childView: UIView? {
+    var childView: UIView! {
         let view = childViewController.view
         view?.translatesAutoresizingMaskIntoConstraints = false
         return view
@@ -92,7 +93,7 @@ class QuickSheetWrapper: UIViewController {
     }()
     
     fileprivate var dragGesture: UIPanGestureRecognizer {
-        if isExpandable { return UIPanGestureRecognizer(target: self, action: #selector(dragIfExpandable)) }
+        if options.isExpandable { return UIPanGestureRecognizer(target: self, action: #selector(dragIfExpandable)) }
         else { return UIPanGestureRecognizer(target: self, action: #selector(dragIfNotExpandable)) }
     }
     
@@ -111,7 +112,7 @@ class QuickSheetWrapper: UIViewController {
         /// Blur background
         addBlurBackground()
     
-        setupChildView()
+        prepareStack()
         
         setupActiveDragArea()
         
@@ -182,33 +183,30 @@ class QuickSheetWrapper: UIViewController {
     
     fileprivate func setupScrollView() {
         containerView.addSubview(scrollView)
-        scrollView.isScrollEnabled = options?.isScrollable ?? false
-        let heightConstraint = sheetState == .expanded ? self.expandedScrollHeight : self.compressedScrollHeight
+        scrollView.isScrollEnabled = options.isScrollable
         NSLayoutConstraint.activate([
             scrollView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
             scrollView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 0),
-            heightConstraint
+            scrollView.heightAnchor.constraint(equalToConstant: self.containerHeight)
         ])
     }
     
-    fileprivate func setupChildView() {
+    fileprivate func prepareStack() {
         addChild(childViewController)
-        scrollView.addSubview(childView!)
         childViewController.didMove(toParent: self)
-        
-        guard let childView = childView else { return }
-        childView.layer.cornerRadius = options?.cornerRadius ?? 10
+        childView.layer.cornerRadius = options.cornerRadius
         childView.clipsToBounds = true
-        NSLayoutConstraint.activate([
-            childView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
-            childView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
-            childView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
-            childView.topAnchor.constraint(equalTo: scrollView.topAnchor),
-            childView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
-            childView.heightAnchor.constraint(equalToConstant: self.containerHeight)
-        ])
         
+        stack.addArrangedSubview(childView)
+        scrollView.addSubview(stack)
+        NSLayoutConstraint.activate([
+            stack.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+            stack.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            stack.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+            stack.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            stack.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor)
+        ])
     }
     
     fileprivate func addBlurBackground() {
@@ -251,8 +249,7 @@ class QuickSheetWrapper: UIViewController {
     
     fileprivate func animateRestoreToMaxHeight() {
         sheetState = .expanded
-        self.expandedScrollHeight.isActive = true
-        self.compressedScrollHeight.isActive = false
+        self.scrollView.isScrollEnabled = options.isScrollable
         UIView.animate(withDuration: 0.25) {
             self.effectView.alpha = 1
             self.containerView.transform = CGAffineTransform(translationX: 0, y: 0)
@@ -262,8 +259,7 @@ class QuickSheetWrapper: UIViewController {
     fileprivate func animateRestoreToMinHeight() {
         let offset = containerHeight - minHeight
         sheetState = .compressed
-        self.expandedScrollHeight.isActive = false
-        self.compressedScrollHeight.isActive = true
+        self.scrollView.isScrollEnabled = false
         let animator = UIViewPropertyAnimator(duration: 0.25, curve: .easeOut) {
             self.containerView.transform = CGAffineTransform(translationX: 0, y: self.isKeyboardEnabled ? self.keyboardOffset + offset : offset)
             self.effectView.alpha = 1

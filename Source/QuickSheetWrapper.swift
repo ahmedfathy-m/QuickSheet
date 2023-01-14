@@ -259,6 +259,7 @@ class QuickSheetWrapper: UIViewController {
     fileprivate func animateRestoreToMinHeight() {
         let offset = containerHeight - minHeight
         sheetState = .compressed
+        self.scrollView.scrollRectToVisible(activeDragArea.frame, animated: true)
         self.scrollView.isScrollEnabled = false
         let animator = UIViewPropertyAnimator(duration: 0.25, curve: .easeOut) {
             self.containerView.transform = CGAffineTransform(translationX: 0, y: self.isKeyboardEnabled ? self.keyboardOffset + offset : offset)

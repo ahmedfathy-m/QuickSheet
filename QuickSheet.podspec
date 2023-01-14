@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'QuickSheet'
-  s.version          = '0.1.1'
+  s.version          = '0.1.2'
   s.summary          = 'Quicksheet is a wrapper for UIViewController to handle bottom sheet presentation with low code footprint and a high degree of customisation.'
 
 # This description is used to generate tags and improve search results.

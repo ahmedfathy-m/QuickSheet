@@ -37,6 +37,10 @@ public struct QuickSheetOptions {
     
     /// The standard Quicksheet options
     public static let standard = QuickSheetOptions(fraction: 0.3, isExpandable: true, isScrollable: false, cornerRadius: 5)
+    /// The standard options with height set at 50% and scrolling enabled
+    public static let scrollableHalf = QuickSheetOptions(fraction: 0.5, isExpandable: true, isScrollable: true, cornerRadius: 5)
+    /// The standard options with height set at 50% and no scrolling or expandability
+    public static let staticHalf = QuickSheetOptions(fraction: 0.5, isExpandable: false, isScrollable: false, cornerRadius: 5)
 
     /// Handle the layer shadow properties of the sheet
     public struct ShadowStyle {

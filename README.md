@@ -16,6 +16,7 @@ You can present the target view controller without any modifications to it by ca
 ```
 self.presentQuickSheet(targetVC, options: .standard)
 ```
+I've added custom presets ready to use: `.staticHalf` & `.scrollableHalf`
 
 ## Customisations
 You can customise the presentation by creating a new options constant
@@ -38,7 +39,7 @@ self.presentQuickSheet(targetVC, options: customOptions)
 Here's how you can use `QuickSheetOptions` to customise your pop-up
 - `fraction`: Represents the height of the sheet as a percentage of the screen height
 - `isExpandable`: Setting this option to `true` enables the pop-up to expand to a near full height
-- `isScrollable`: Setting this option to `true` enables scrolling in the content view
+- `isScrollable`: Setting this option to `true` enables scrolling in the content view when expanded
 - `cornerRadius`: Changing this value determines the radius of the top left and right corners
 - `blurEffect`: Choose a background effect from a system-defined list `UIBlurEffect.Style`
 - `shadowStyle`: Determines the shadow style of the pop-up. Set to `.standard` to use the default configuration or create your own `QuickSheetOptions.ShadowStyle` constant as follows

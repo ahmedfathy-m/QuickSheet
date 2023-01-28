@@ -24,4 +24,13 @@ extension UIViewController {
         wrapper.modalPresentationStyle = .custom
         self.present(wrapper, animated: false)
     }
+    
+    public func presentQuickSheet(_ viewController: UIViewController, fraction: Double, style: PresentationStyle) {
+        let wrapper = QuickSheetWrapper()
+        let options = QuickSheetOptions(fraction: fraction, presentationStyle: style)
+        wrapper.childViewController = viewController
+        wrapper.options = options
+        wrapper.modalPresentationStyle = .custom
+        self.present(wrapper, animated: false)
+    }
 }

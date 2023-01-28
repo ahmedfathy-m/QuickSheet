@@ -16,7 +16,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
         QuickSheetOptions.standard = QuickSheetOptions(fraction: 0.75, presentationStyle: .regular, cornerRadius: 10, blurEffect: .regular, shadowStyle: .standard)
         let scene = UIApplication.shared.connectedScenes.first
         window = UIWindow(windowScene: scene as! UIWindowScene)

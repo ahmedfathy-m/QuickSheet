@@ -16,14 +16,34 @@ You can present the target view controller without any modifications to it by ca
 ```
 self.presentQuickSheet(targetVC, options: .standard)
 ```
-I've added custom presets ready to use: `.staticHalf` & `.scrollableHalf`
+
+You can customise the standard options at the app delegate after the app launch
+```
+    func application(_ application: UIApplication,
+    didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        QuickSheetOptions.standard = QuickSheetOptions(
+                                    fraction: 0.75,
+                                    presentationStyle: .regular,
+                                    cornerRadius: 10,
+                                    blurEffect: .regular,
+                                    shadowStyle: .standard
+                                    )
+        return true
+    }
+```
+Most of the settings you'd only need to change once. only the fraction and the presentation style depend on what kind of view you're presenting. So, now you have direct access to them without needing to create a custom options object to modify one or two parameters.
+```
+self.presentQuickSheet(targetVC, fraction: 0.5)
+```
+```
+self.presentQuickSheet(targetVC, fraction: 0.5, presentationStyle: .scrollable)
+```
 
 ## Customisations
 You can customise the presentation by creating a new options constant
 ```
 let customOptions = QuickSheetOptions(fraction: 0.3,
-                                      isExpandable: true,
-                                      isScrollable: true,
+                                      presentationStyle: .expandable,
                                       cornerRadius: 10,
                                       blurEffect: .systemMaterial,
                                       shadowStyle: .standard)
@@ -34,14 +54,14 @@ self.presentQuickSheet(targetVC, options: customOptions)
 <a href="https://imgur.com/CQ4JYgb"><img src="https://i.imgur.com/CQ4JYgbl.png" title="source: imgur.com" /></a>
 <a href="https://imgur.com/5MQ2v4Z"><img src="https://i.imgur.com/5MQ2v4Zl.png" title="source: imgur.com" /></a>
 <a href="https://imgur.com/wFHANbD"><img src="https://i.imgur.com/wFHANbDl.png" title="source: imgur.com" /></a>
-<img src="https://i.imgur.com/u4XsOX5.gif" width="295.5" />
+![](https://media4.giphy.com/media/BCMDci08QPWeuKv2MM/giphy.gif)
+![](https://media1.giphy.com/media/6AbFr1Dt0k2zSJGBbX/giphy.gif)
 
 Here's how you can use `QuickSheetOptions` to customise your pop-up
 - `fraction`: Represents the height of the sheet as a percentage of the screen height
-- `isExpandable`: Setting this option to `true` enables the pop-up to expand to a near full height
-- `isScrollable`: Setting this option to `true` enables scrolling in the content view when expanded
+- `presentationStyle`: The sheet's presentation style; regular, expandable or scrollable.
 - `cornerRadius`: Changing this value determines the radius of the top left and right corners
-- `blurEffect`: Choose a background effect from a system-defined list `UIBlurEffect.Style`
+- `blurEffect`: Choose a background effect from a system-defined list `UIBlurEffect.Style`. Setting this to nil removes the blur effect and replaces it with a 75% opaque black background
 - `shadowStyle`: Determines the shadow style of the pop-up. Set to `.standard` to use the default configuration or create your own `QuickSheetOptions.ShadowStyle` constant as follows
 ```
 let shadowStyle = QuickSheetOptions.ShadowStyle(shadowRadius: 10.0,

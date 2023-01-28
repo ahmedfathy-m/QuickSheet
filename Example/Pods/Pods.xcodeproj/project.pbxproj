@@ -11,6 +11,7 @@
 		2B1F5C34E172B1724BF8FF7FEBF12A1B /* QuickSheet-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = CC63926C7F5C8CBB1D90706F40DF983C /* QuickSheet-dummy.m */; };
 		3DC60DD05F588B6B28EFED4CA84D0D3D /* Pods-QuickSheet_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = B98AF3A3CB29C8F08CB908272418542C /* Pods-QuickSheet_Tests-dummy.m */; };
 		73495C8DD2E1BAA5B75E0EF7D3B84AA7 /* QuickSheet-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = D21F024EBE9ED1F8C40B11B5E8D54B33 /* QuickSheet-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		744389B02984333F0057102E /* PresentationStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 744389AF2984333F0057102E /* PresentationStyle.swift */; };
 		74965B4A296B6628008998DA /* QuickSheetWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74965B45296B6628008998DA /* QuickSheetWrapper.swift */; };
 		74965B4B296B6628008998DA /* QuickSheetOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74965B46296B6628008998DA /* QuickSheetOptions.swift */; };
 		74965B4C296B6628008998DA /* SheetState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74965B47296B6628008998DA /* SheetState.swift */; };
@@ -53,6 +54,7 @@
 		652722CC6DBAD85F075711143574131C /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		686EAE293CC90E990DAC30F1AFBEB259 /* Pods-QuickSheet_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-QuickSheet_Example.release.xcconfig"; sourceTree = "<group>"; };
 		73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		744389AF2984333F0057102E /* PresentationStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationStyle.swift; sourceTree = "<group>"; };
 		74965B45296B6628008998DA /* QuickSheetWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuickSheetWrapper.swift; sourceTree = "<group>"; };
 		74965B46296B6628008998DA /* QuickSheetOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuickSheetOptions.swift; sourceTree = "<group>"; };
 		74965B47296B6628008998DA /* SheetState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SheetState.swift; sourceTree = "<group>"; };
@@ -165,6 +167,7 @@
 				74965B46296B6628008998DA /* QuickSheetOptions.swift */,
 				74965B45296B6628008998DA /* QuickSheetWrapper.swift */,
 				74965B47296B6628008998DA /* SheetState.swift */,
+				744389AF2984333F0057102E /* PresentationStyle.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -400,6 +403,7 @@
 				74965B4A296B6628008998DA /* QuickSheetWrapper.swift in Sources */,
 				74965B4C296B6628008998DA /* SheetState.swift in Sources */,
 				2B1F5C34E172B1724BF8FF7FEBF12A1B /* QuickSheet-dummy.m in Sources */,
+				744389B02984333F0057102E /* PresentationStyle.swift in Sources */,
 				74965B4E296B6628008998DA /* QuickSheet+UIViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

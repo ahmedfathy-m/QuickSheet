@@ -12,6 +12,7 @@
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
+		744389B2298437F40057102E /* PreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 744389B1298437F40057102E /* PreferencesView.swift */; };
 		74782C45296C77FC0087B78B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74782C44296C77FC0087B78B /* ViewController.swift */; };
 		74782C48296C78300087B78B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 74782C46296C782F0087B78B /* Main.storyboard */; };
 		74965B54296B6BE5008998DA /* PreferenceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74965B50296B6BE5008998DA /* PreferenceCell.swift */; };
@@ -44,6 +45,7 @@
 		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
 		698998B623F738B524F62A79 /* Pods_QuickSheet_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QuickSheet_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		69B042A415530E3C839DA7F6 /* Pods_QuickSheet_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QuickSheet_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		744389B1298437F40057102E /* PreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesView.swift; sourceTree = "<group>"; };
 		74782C44296C77FC0087B78B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		74782C47296C782F0087B78B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		74965B50296B6BE5008998DA /* PreferenceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferenceCell.swift; sourceTree = "<group>"; };
@@ -117,6 +119,7 @@
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
 				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
 				607FACD31AFB9204008FA782 /* Supporting Files */,
+				744389B1298437F40057102E /* PreferencesView.swift */,
 			);
 			name = "Example for QuickSheet";
 			path = QuickSheet;
@@ -341,6 +344,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				74782C45296C77FC0087B78B /* ViewController.swift in Sources */,
+				744389B2298437F40057102E /* PreferencesView.swift in Sources */,
 				74965B54296B6BE5008998DA /* PreferenceCell.swift in Sources */,
 				74965B55296B6BE5008998DA /* Preferences.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,

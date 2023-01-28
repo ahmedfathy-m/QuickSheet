@@ -8,39 +8,25 @@
 
 import UIKit
 import QuickSheet
+import SwiftUI
 
 class ViewController: UIViewController {
+    lazy var preferencesView = PreferencesView { options, viewController  in
+        self.presentQuickSheet(viewController, options: options)
+    }
+    lazy var hosting = UIHostingController(rootView: preferencesView)
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.addChild(hosting)
+        self.view.addSubview(hosting.view)
+        hosting.view.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            self.view.leadingAnchor.constraint(equalTo: hosting.view.leadingAnchor),
+            self.view.topAnchor.constraint(equalTo: hosting.view.topAnchor),
+            self.view.trailingAnchor.constraint(equalTo: hosting.view.trailingAnchor),
+            self.view.bottomAnchor.constraint(equalTo: hosting.view.bottomAnchor)
+        ])
     }
-    
-    @IBAction func didPressPresent(_ sender: UIButton) {
-        let dummyVC = storyboard!.instantiateViewController(withIdentifier: "DummyVC")
-        let shadowStyle = QuickSheetOptions.ShadowStyle(shadowRadius: Preferences.values[.shadowRadius] as! CGFloat,
-                                                        shadowColor: .black,
-                                                        shadowOpacity: Preferences.values[.shadowOpacity] as! Float)
-        let customOptions = QuickSheetOptions(fraction: Preferences.values[.fraction] as! Double,
-                                              isExpandable: Preferences.values[.expandable] as! Bool,
-                                              isScrollable: Preferences.values[.scrollable] as! Bool,
-                                              cornerRadius: Preferences.values[.cornerRadius] as! CGFloat,
-                                              blurEffect: Preferences.values[.blurEffect] as! UIBlurEffect.Style,
-                                              shadowStyle: shadowStyle)
-        self.presentQuickSheet(dummyVC, options: customOptions)
-    }
-    
-}
-
-extension ViewController: UITableViewDataSource, UITableViewDelegate {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return Preferences.allCases.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! PreferenceCell
-        cell.key = Preferences.allCases[indexPath.row]
-        return cell
-    }
-    
     
 }

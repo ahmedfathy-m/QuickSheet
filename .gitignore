@@ -34,3 +34,12 @@ Carthage/Build
 # `pod install` in .travis.yml
 #
 # Pods/
+
+# extra files
+._SheetState.swift
+._QuickSheetWrapper.swift
+._QuickSheetOptions.swift
+._QuickSheet+UIViewControllerTransitioningDelegate.swift
+._QuickSheet+UIViewController.swift
+._PresentationStyle.swift
+

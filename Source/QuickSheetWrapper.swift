@@ -71,10 +71,17 @@ class QuickSheetWrapper: UIViewController {
     
     /// The visual blur effect used for the background
     lazy var effectView: UIView = {
-        let blur = UIBlurEffect(style: options.blurEffect)
-        let visual = UIVisualEffectView(effect: blur)
-        visual.translatesAutoresizingMaskIntoConstraints = false
-        return visual
+        if let effect = options.blurEffect {
+            let blur = UIBlurEffect(style: effect)
+            let visual = UIVisualEffectView(effect: blur)
+            visual.translatesAutoresizingMaskIntoConstraints = false
+            return visual
+        } else {
+            let grayView = UIView()
+            grayView.translatesAutoresizingMaskIntoConstraints = false
+            grayView.backgroundColor = .black.withAlphaComponent(0.75)
+            return grayView
+        }
     }()
     
     var childViewController: UIViewController!
@@ -93,7 +100,7 @@ class QuickSheetWrapper: UIViewController {
     }()
     
     fileprivate var dragGesture: UIPanGestureRecognizer {
-        if options.isExpandable { return UIPanGestureRecognizer(target: self, action: #selector(dragIfExpandable)) }
+        if (options.presentationStyle == .expandable || options.presentationStyle == .scrollable) { return UIPanGestureRecognizer(target: self, action: #selector(dragIfExpandable)) }
         else { return UIPanGestureRecognizer(target: self, action: #selector(dragIfNotExpandable)) }
     }
     
@@ -183,7 +190,7 @@ class QuickSheetWrapper: UIViewController {
     
     fileprivate func setupScrollView() {
         containerView.addSubview(scrollView)
-        scrollView.isScrollEnabled = options.isScrollable
+        scrollView.isScrollEnabled = options.presentationStyle == .scrollable
         NSLayoutConstraint.activate([
             scrollView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
@@ -205,7 +212,8 @@ class QuickSheetWrapper: UIViewController {
             stack.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
             stack.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
             stack.topAnchor.constraint(equalTo: scrollView.topAnchor),
-            stack.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor)
+            stack.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            stack.heightAnchor.constraint(greaterThanOrEqualToConstant: self.containerHeight)
         ])
     }
     
@@ -249,7 +257,7 @@ class QuickSheetWrapper: UIViewController {
     
     fileprivate func animateRestoreToMaxHeight() {
         sheetState = .expanded
-        self.scrollView.isScrollEnabled = options.isScrollable
+        self.scrollView.isScrollEnabled = options.presentationStyle == .scrollable
         UIView.animate(withDuration: 0.25) {
             self.effectView.alpha = 1
             self.containerView.transform = CGAffineTransform(translationX: 0, y: 0)
@@ -287,6 +295,7 @@ class QuickSheetWrapper: UIViewController {
             case (SheetState.compressed, false):
                 self.containerView.transform = CGAffineTransform(translationX: 0, y: translation + offset)
             case (SheetState.expanded, true), (SheetState.expanded, false):
+                guard translation > 0 else { return }
                 self.containerView.transform = CGAffineTransform(translationX: 0, y: translation)
             }
         }
@@ -317,13 +326,21 @@ class QuickSheetWrapper: UIViewController {
         let offset = containerHeight - minHeight
         let translation = sender.translation(in: sender.view).y
         if sender.state == .changed {
-            print(translation)
-            print(dismissThreshold)
             guard translation > -dismissThreshold else { return }
             if isKeyboardEnabled {
-                self.containerView.transform = CGAffineTransform(translationX: 0, y: keyboardOffset + translation + offset)
+                if translation > 0 {
+                    self.containerView.transform = CGAffineTransform(translationX: 0, y: keyboardOffset + translation + offset)
+                } else {
+                    let scale = (self.minHeight + abs(translation / 2.0)) / self.minHeight
+                    self.containerView.transform = CGAffineTransform(translationX: 0, y: keyboardOffset + offset).scaledBy(x: 1, y: scale)
+                }
             } else {
-                self.containerView.transform = CGAffineTransform(translationX: 0, y: translation + offset)
+                if translation > 0 {
+                    self.containerView.transform = CGAffineTransform(translationX: 0, y: translation + offset)
+                } else {
+                    let scale = (self.minHeight + abs(translation / 2.0)) / self.minHeight
+                    self.containerView.transform = CGAffineTransform(translationX: 0, y: offset).scaledBy(x: 1, y: scale)
+                }
             }
         } else if sender.state == .ended {
             if translation > dismissThreshold {
